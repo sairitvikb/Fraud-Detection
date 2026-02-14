@@ -39,3 +39,23 @@ fraud_detection/
 │   └── config.yaml                  # Configuration
 └── requirements.txt
 ```
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+### Real-Time Fraud Detection
+
+```bash
+python src/streaming/kafka_consumer.py
+```
+
+### API Server
+
+```bash
+python src/api/fastapi_server.py
+```
+
