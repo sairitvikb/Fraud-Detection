@@ -14,3 +14,28 @@ This project implements a comprehensive fraud detection system that processes 50
 - **Vision Transformers**: ViT-based models for document and image fraud detection
 - **Customer Intelligence**: Behavioral analysis, anomaly detection, and risk scoring
 - **Scalable Architecture**: Microservices with FastAPI, Redis caching, and distributed processing
+## Project Structure
+
+```
+fraud_detection/
+├── src/
+│   ├── models/
+│   │   ├── vision_transformer.py    # ViT-based fraud detection
+│   │   ├── graph_neural_network.py  # GNN models (GCN, GraphSAGE, GAT)
+│   │   ├── ensemble.py               # Ensemble combining ViT and GNN
+│   │   └── feature_extraction.py    # Multimodal feature engineering
+│   ├── data/
+│   │   ├── data_loader.py           # Transaction data processing
+│   │   └── graph_builder.py         # Transaction graph construction
+│   ├── streaming/
+│   │   ├── kafka_consumer.py        # Kafka real-time processing
+│   │   └── event_processor.py       # Event stream handling
+│   ├── explainability/
+│   │   ├── shap_explainer.py        # SHAP-based explanations
+│   │   └── feature_importance.py    # Feature attribution analysis
+│   └── api/
+│       └── fastapi_server.py        # REST API for predictions
+├── config/
+│   └── config.yaml                  # Configuration
+└── requirements.txt
+```
