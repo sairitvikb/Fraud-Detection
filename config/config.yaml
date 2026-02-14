@@ -1,0 +1,74 @@
+project:
+  name: "Fraud Detection & Customer Intelligence Platform"
+  version: "1.0.0"
+
+data:
+  transaction_path: "data/transactions.csv"
+  graph_path: "data/transaction_graph.pt"
+  batch_size: 64
+  num_workers: 4
+
+models:
+  vision_transformer:
+    enabled: true
+    model_name: "google/vit-base-patch16-224"
+    image_size: 224
+    patch_size: 16
+    num_classes: 2
+    dropout: 0.1
+    learning_rate: 1e-4
+    weight_decay: 0.01
+  
+  graph_neural_network:
+    enabled: true
+    architecture: "gat"
+    hidden_dim: 128
+    num_layers: 3
+    num_heads: 8
+    dropout: 0.2
+    learning_rate: 5e-4
+    weight_decay: 0.0001
+  
+  ensemble:
+    enabled: true
+    vit_weight: 0.4
+    gnn_weight: 0.6
+    threshold: 0.5
+
+streaming:
+  kafka:
+    enabled: true
+    bootstrap_servers: "localhost:9092"
+    topic: "transactions"
+    consumer_group: "fraud_detection"
+    batch_size: 1000
+    max_poll_records: 500
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  redis:
+    enabled: true
+    host: "localhost"
+    port: 6379
+    db: 0
+    ttl: 3600
+
+explainability:
+  shap:
+    enabled: true
+    sample_size: 100
+    max_evals: 1000
+  feature_importance:
+    top_k: 20
+
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "roc_auc"
+    - "pr_auc"
+  false_positive_reduction_target: 0.85
